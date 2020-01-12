@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" 
+        integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" 
+        crossorigin="anonymous">
+        
+        <!-- our css should always be at last so that it can override all previous rules -->
+        
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <h1 id="contact-list-heading">
+            <i class="fas fa-address-book"></i>
+            Contact List
+        </h1>
+        
+            <div id="contact-container" >
+                <ul style="width: 100%;list-style: none;margin: 0;padding:0px 0px 0px 0px;">
+                    <% for (let i of contact_list){%>
+                    <li class="contact-bar">
+                        
+                        <div class="contact-details" style="text-align: center;margin-left:5px;">
+                            <span><%=i.name%></span>
+                            <span><%=i.phone%></span>
+                        </div>
+                        <!-- the below code is for using params only -->
+                        <!-- <div style="text-align: center;margin-right:5px;"><%=i.phone%><a href="/delete-contact/<%=i.phone%>" style="margin: 0px 2px 0px 5px;"><i class="fas fa-trash-alt"></i></a></div> -->
+                        <!-- the below code is for using query only -->
+                        <!-- <div class="contact-details" style="text-align: center;margin-right:5px;"><%=i.phone%></div> -->
+                        <div class="delete-btn"><a href="/delete-contact/?id=<%= i._id %>" ><i class="fas fa-trash-alt"></i></a></div>
+                    </li>
+                    
+                    <%}%>
+                </ul>
+            </div>
+
+            <div id="form-container">
+            <form id="form-wrap" action="/create-contact" method="POST">
+                
+                <div >
+                <input class="wide-form" type="text" name="name" placeholder="Enter Name" required>
+                </div>  
+                <div>
+                <input class="wide-form" type="number" name="phone" placeholder="Enter Phone" required>
+                </div>
+                <div>
+                <button id="wide-button" type="submit" >Add </button>
+                </div>
+            </form>
+            </div>
+        
+
+        
+
+        <script src="/js/home.js"></script>
+    </body>
+</html>
